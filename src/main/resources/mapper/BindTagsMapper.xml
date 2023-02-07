@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="github.xiny.simpleblog.mapper.BindTagsMapper">
+
+    <resultMap id="BaseResultMap" type="github.xiny.simpleblog.domain.BindTags">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="tagsId" column="tags_id" jdbcType="INTEGER"/>
+            <result property="blogId" column="blog_id" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,tags_id,blog_id
+    </sql>
+</mapper>

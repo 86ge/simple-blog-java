@@ -1,0 +1,59 @@
+spring:
+    # 应用名称
+    application.name: sa-plus
+    profiles:
+        # 启动环境加载，同时加载两个的写法：common,prod  优先级左>右
+        active: dev
+        # active: test
+        # active: prod
+
+# ================ 公共配置(优先级低于application-xxx.yml)  ================
+    # mvc设置
+    mvc:
+        format:
+            # 日期映射格式
+            date: yyyy-MM-dd HH:mm:ss
+    # servlet配置
+    servlet:
+        # 单文件大小限制1024M，避免文件上传时因为文件过大而被限制
+        multipart:
+            max-file-size: 1024MB
+            max-request-size: 1024MB
+    # jackson设置
+    jackson:
+        # 默认的日期转换格式
+        date-format: yyyy-MM-dd HH:mm:ss
+        # 解决因为时区问题，date少8小时的bug
+        # time-zone: GMT+8
+
+
+
+# mybatis-plus配置
+mybatis-plus:
+    # 配置别名包，在mapper.xml中可以直接返回SoMap
+    type-aliases-package: com.pj.utils.so
+    # 一些配置
+    configuration:
+        # 控制打印sql
+        # log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+        # 是否开启下划线转驼峰
+        map-underscore-to-camel-case: false
+        # 即使属性为null, 也要映射
+        call-setters-on-nulls: true
+
+
+sa-token:
+    # token名称 (同时也是cookie名称)
+    token-name: satoken
+    # token有效期，单位s 默认30天, -1代表永不过期
+    timeout: 3600
+    # token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
+    activity-timeout: -1
+    # 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
+    is-concurrent: true
+    # 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
+    is-share: true
+    # token风格
+    token-style: uuid
+    # 是否输出操作日志
+    is-log: false

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="github.xiny.simpleblog.mapper.BlogMapper">
+
+    <resultMap id="BaseResultMap" type="github.xiny.simpleblog.domain.Blog">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="title" column="title" jdbcType="VARCHAR"/>
+            <result property="html" column="html" jdbcType="VARCHAR"/>
+            <result property="markdown" column="markdown" jdbcType="VARCHAR"/>
+            <result property="update_time" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,title,html,markdown
+        update
+    </sql>
+</mapper>
