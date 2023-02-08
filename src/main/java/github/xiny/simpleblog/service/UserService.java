@@ -11,6 +11,7 @@ import github.xiny.simpleblog.mapper.UserMapper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -77,5 +78,20 @@ public class UserService {
         aboutMe.setMarkdown(s);
         aboutMeMapper.updateById(aboutMe);
         return "success";
+    }
+    public void updateInfo(String oldPassword, String newPassword, String avatarId){
+        final int userId = StpUtil.getLoginIdAsInt();
+        final User user = userMapper.selectById(userId);
+        if (newPassword!=null&&user.getPassword().equals(oldPassword)){
+            user.setPassword(newPassword);
+        }else throw new RuntimeException("密码错误！");
+        System.out.println(oldPassword);
+        System.out.println(newPassword);
+        System.out.println(avatarId);
+        if(avatarId != null){
+            user.setAvatar(Integer.parseInt(avatarId));
+        }
+        user.setUpdatetime(new Date());
+        userMapper.updateById(user);
     }
 }

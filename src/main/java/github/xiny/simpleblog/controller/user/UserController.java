@@ -4,6 +4,7 @@ package github.xiny.simpleblog.controller.user;
 import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.annotation.SaIgnore;
 import cn.dev33.satoken.stp.StpUtil;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import github.xiny.simpleblog.domain.*;
@@ -35,7 +36,7 @@ public class UserController {
         try {
             msg = userService.login(account, password);
         } catch (Exception e) {
-            return AjaxJson.getSuccess(e.getMessage());
+            return AjaxJson.getError(e.getMessage());
         }
         if (msg.getUserId().equals(StpUtil.getLoginIdAsInt())) {
             msg.setPassword(null);
@@ -80,6 +81,18 @@ public class UserController {
         }
         // 进行登录逻辑
         return AjaxJson.getError("账号已存在！");
+    }
+
+    @RequestMapping("/updateInfo")
+    public AjaxJson updateInfo(String oldPassword, String newPassword, String avatar) {
+        if (oldPassword == null && newPassword == null && avatar == null) {
+            return AjaxJson.getError("参数错误！");
+        }
+        if(oldPassword!=null&&newPassword==null){
+            return AjaxJson.getError("参数错误！");
+        }
+        userService.updateInfo(oldPassword, newPassword, avatar);
+        return AjaxJson.getSuccess("修改成功！");
     }
 
     @RequestMapping("/aboutMe")
